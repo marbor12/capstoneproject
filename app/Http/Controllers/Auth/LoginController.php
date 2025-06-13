@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LoginController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -16,23 +20,21 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            // Jika pakai Sanctum:
-            $token = $user->createToken('api-token')->plainTextToken;
-            return response()->json([
-                'user' => $user,
-                'token' => $token,
-            ]);
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('home'));
         }
 
-        return response()->json(['message' => 'Email atau password salah.'], 401);
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ])->withInput();
     }
 
     public function logout(Request $request)
     {
-        // Jika pakai Sanctum:
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logged out']);
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }
