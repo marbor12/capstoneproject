@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Eksora - Temukan Wisata Terbaik di Bali')</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -30,17 +31,17 @@
             --gray-800: #1e293b;
             --gray-900: #0f172a;
         }
-        
+
         * {
             font-family: 'Inter', sans-serif;
         }
-        
+
         body {
             background-color: var(--gray-50);
             color: var(--gray-800);
             line-height: 1.6;
         }
-        
+
         /* Navigation */
         .navbar {
             background: rgba(255, 255, 255, 0.95) !important;
@@ -48,13 +49,13 @@
             border-bottom: 1px solid var(--gray-200);
             padding: 1rem 0;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
             color: var(--primary-blue) !important;
         }
-        
+
         .nav-link {
             color: var(--gray-600) !important;
             font-weight: 500;
@@ -62,19 +63,19 @@
             border-radius: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link:hover,
         .nav-link.active {
             color: var(--primary-blue) !important;
             background-color: var(--light-blue);
         }
-        
+
         /* Main Content */
         .main-content {
             padding-top: 80px;
             min-height: 100vh;
         }
-        
+
         /* Buttons */
         .btn-primary {
             background: var(--primary-blue);
@@ -84,13 +85,13 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             background: var(--dark-blue);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
         }
-        
+
         .btn-outline-primary {
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
@@ -99,14 +100,14 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
+
         .btn-outline-primary:hover {
             background: var(--primary-blue);
             border-color: var(--primary-blue);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         /* Cards */
         .destination-card {
             border-radius: 16px;
@@ -116,12 +117,12 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             background: white;
         }
-        
+
         .destination-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
         }
-        
+
         .review-card {
             background: white;
             border-radius: 16px;
@@ -129,18 +130,18 @@
             transition: all 0.3s ease;
             padding: 1.5rem;
         }
-        
+
         .review-card:hover {
             box-shadow: 0 12px 30px rgba(37, 99, 235, 0.1);
             transform: translateY(-4px);
             border-color: var(--light-blue);
         }
-        
+
         /* Rating Stars */
         .rating-stars {
             color: #fbbf24;
         }
-        
+
         /* Badges */
         .category-badge {
             background: var(--light-blue);
@@ -150,7 +151,7 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-        
+
         .recommendation-badge {
             background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             color: white;
@@ -163,7 +164,7 @@
             left: 1rem;
             z-index: 2;
         }
-        
+
         .price-tag {
             background: rgba(15, 23, 42, 0.9);
             color: white;
@@ -175,7 +176,7 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
-        
+
         /* Form Controls */
         .form-control,
         .form-select {
@@ -184,44 +185,44 @@
             padding: 0.75rem 1rem;
             transition: all 0.3s ease;
         }
-        
+
         .form-control:focus,
         .form-select:focus {
             border-color: var(--primary-blue);
             box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.1);
         }
-        
+
         /* Footer */
         .footer {
             background: var(--gray-900);
             color: white;
             padding: 3rem 0 2rem;
         }
-        
+
         .footer h5,
         .footer h6 {
             color: white;
         }
-        
+
         .footer .text-muted {
             color: var(--gray-400) !important;
         }
-        
+
         .footer a {
             color: var(--gray-400);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        
+
         .footer a:hover {
             color: var(--light-blue);
         }
-        
+
         /* Spacing */
         .py-section {
             padding: 5rem 0;
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-content {
@@ -229,9 +230,10 @@
             }
         }
     </style>
-    
+
     @stack('styles')
 </head>
+
 <body>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -245,22 +247,37 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
+                            href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('destinations.*') ? 'active' : '' }}" href="{{ route('destinations.index') }}">Destinasi</a>
+                        <a class="nav-link {{ request()->routeIs('destinations.*') ? 'active' : '' }}"
+                            href="{{ route('destinations.index') }}">Destinasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('reviews.*') ? 'active' : '' }}" href="{{ route('reviews.index') }}">Review</a>
+                        <a class="nav-link {{ request()->routeIs('reviews.*') ? 'active' : '' }}"
+                            href="{{ route('reviews.index') }}">Review</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('recommendations.*') ? 'active' : '' }}" href="{{ route('recommendations.index') }}">Rekomendasi</a>
+                        <a class="nav-link {{ request()->routeIs('recommendations.*') ? 'active' : '' }}"
+                            href="{{ route('recommendations.index') }}">Rekomendasi</a>
                     </li>
                 </ul>
-                <div class="d-flex gap-2">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary">Masuk</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary">Daftar</a>
+                <div class="d-flex gap-2 align-items-center">
+                    @guest
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary">Masuk</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Daftar</a>
+                    @endguest
+
+                    @auth
+                        <span class="me-2 text-muted">Halo, {{ Auth::user()->name }}</span>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-primary">Keluar</button>
+                        </form>
+                    @endauth
                 </div>
+
             </div>
         </div>
     </nav>
@@ -290,7 +307,8 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5><i class="bi bi-compass"></i> Eksora</h5>
-                    <p class="text-muted">Platform terpercaya untuk menemukan destinasi wisata terbaik di Bali dengan teknologi AI dan review komunitas.</p>
+                    <p class="text-muted">Platform terpercaya untuk menemukan destinasi wisata terbaik di Bali dengan
+                        teknologi AI dan review komunitas.</p>
                     <div class="mt-3">
                         <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
@@ -310,11 +328,16 @@
                 <div class="col-lg-3 mb-4">
                     <h6>Kategori</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('destinations.index', ['category' => 'pantai']) }}">Pantai</a></li>
-                        <li class="mb-2"><a href="{{ route('destinations.index', ['category' => 'gunung']) }}">Gunung</a></li>
-                        <li class="mb-2"><a href="{{ route('destinations.index', ['category' => 'budaya']) }}">Budaya</a></li>
-                        <li class="mb-2"><a href="{{ route('destinations.index', ['category' => 'kuliner']) }}">Kuliner</a></li>
-                        <li class="mb-2"><a href="{{ route('destinations.index', ['category' => 'adventure']) }}">Adventure</a></li>
+                        <li class="mb-2"><a
+                                href="{{ route('destinations.index', ['category' => 'pantai']) }}">Pantai</a></li>
+                        <li class="mb-2"><a
+                                href="{{ route('destinations.index', ['category' => 'gunung']) }}">Gunung</a></li>
+                        <li class="mb-2"><a
+                                href="{{ route('destinations.index', ['category' => 'budaya']) }}">Budaya</a></li>
+                        <li class="mb-2"><a
+                                href="{{ route('destinations.index', ['category' => 'kuliner']) }}">Kuliner</a></li>
+                        <li class="mb-2"><a
+                                href="{{ route('destinations.index', ['category' => 'adventure']) }}">Adventure</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-4">
@@ -333,7 +356,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     @stack('scripts')
 </body>
+
 </html>
